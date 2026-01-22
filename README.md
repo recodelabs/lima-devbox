@@ -1,6 +1,6 @@
 # Lima Devbox
 
-A Claude Code skill for setting up Lima VMs as isolated development environments on macOS. Run AI coding agents like Claude Code with full autonomy (`--dangerously-skip-permissions`) in a sandboxed VM where they can't touch your host system.
+A Claude Code skill for setting up Lima VMs as isolated development environments on macOS.   Designed to safely run AI coding agents like close code in YOLO mode (`--dangerously-skip-permissions`) in a sandboxed VM where it can't nuke your host system.
 
 ## What is Lima?
 
