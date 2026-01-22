@@ -1,0 +1,20 @@
+{
+  "name": "lima-devbox",
+  "owner": {
+    "name": "Matt Berg",
+    "email": "mberg@recodelabs.org"
+  },
+  "metadata": {
+    "description": "Lima VM setup wizard for isolated macOS development environments. Create sandboxed VMs to safely run AI coding agents (Claude Code, Gemini CLI, Codex CLI, OpenCode) in autonomous mode.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "lima-devbox",
+      "description": "Guide users through setting up a Lima VM for isolated development on macOS. Use when users want to create a sandboxed development environment, set up a VM for AI coding tools, or isolate code execution from their host machine.",
+      "source": "./",
+      "strict": false,
+      "skills": ["skills/lima-devbox"]
+    }
+  ]
+}

@@ -39,17 +39,25 @@ This is a Claude Code plugin that provides a guided wizard for creating and conf
 
 ## Installation
 
-Add this plugin to your Claude Code configuration:
+### Via Claude Code Plugin (Recommended)
 
 ```bash
-# Clone the repo
-git clone https://github.com/yourusername/lima-devbox.git ~/github/lima-devbox
+# Install directly from GitHub
+claude plugin add https://github.com/recodelabs/lima-devbox
 
-# Add to Claude Code (in your project or globally)
-claude mcp add-plugin ~/github/lima-devbox
+# Or install from a local clone
+git clone https://github.com/recodelabs/lima-devbox.git ~/github/lima-devbox
+claude plugin add ~/github/lima-devbox
 ```
 
-Or add manually to your Claude settings.
+### Manual Installation
+
+Clone the repo and add it as a plugin:
+
+```bash
+git clone https://github.com/recodelabs/lima-devbox.git ~/github/lima-devbox
+claude plugin add ~/github/lima-devbox/.claude-plugin
+```
 
 ## Usage
 
