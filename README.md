@@ -41,6 +41,12 @@ This is a Claude Code plugin that provides a guided wizard for creating and conf
 
 ### Via Claude Code Plugin (Recommended)
 
+# In Claude
+/plugins
+Add marketplace
+recodelabs/lima-devbox
+Install lima box
+
 ```bash
 # Install directly from GitHub
 claude plugin add https://github.com/recodelabs/lima-devbox
@@ -65,6 +71,12 @@ In a Claude Code session, invoke the skill:
 
 ```
 /lima-devbox
+```
+
+or simply prompt
+
+```
+Use the lima-devbox skill to create me a VM for development
 ```
 
 The skill will walk you through:
