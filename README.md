@@ -46,7 +46,7 @@ This is a Claude Code plugin that provides a guided wizard for creating and conf
 /plugins
 Add marketplace
 recodelabs/lima-devbox
-Install lima box
+Install lima-devbox
 ```
 
 ```bash
