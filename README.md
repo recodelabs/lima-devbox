@@ -42,10 +42,12 @@ This is a Claude Code plugin that provides a guided wizard for creating and conf
 ### Via Claude Code Plugin (Recommended)
 
 # In Claude
+```
 /plugins
 Add marketplace
 recodelabs/lima-devbox
 Install lima box
+```
 
 ```bash
 # Install directly from GitHub
