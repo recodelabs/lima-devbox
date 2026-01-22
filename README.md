@@ -12,7 +12,7 @@ A Claude Code skill for setting up Lima VMs as isolated development environments
 
 **Lima** stands for **Linux on Mac**. It's a lightweight tool that creates Linux virtual machines on macOS with automatic file sharing and port forwarding.
 
-We use Lima for this project because:
+We chose Lima for this project for:
 - **Isolation**: AI coding assistants can execute code in a sandboxed environment without access to your entire filesystem
 - **Security**: Only directories you explicitly share are visible to the VM
 - **Native performance**: Uses Apple's Virtualization.framework (vz) on modern Macs for near-native speed
