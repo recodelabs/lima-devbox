@@ -14,7 +14,7 @@
       "description": "Guide users through setting up a Lima VM for isolated development on macOS. Use when users want to create a sandboxed development environment, set up a VM for AI coding tools, or isolate code execution from their host machine.",
       "source": "./",
       "strict": false,
-      "skills": ["skills/lima-devbox"]
+      "skills": ["./skills/lima-devbox"]
     }
   ]
 }
