@@ -167,11 +167,26 @@ mounts:
 
 IMPORTANT: Do NOT include a `location: "~"` mount. Only the specified directories should be accessible.
 
-#### Step 4: Restart VM (required after mount changes)
+#### Step 4: Full Stop/Start VM (required after mount changes)
+
+**IMPORTANT**: Mount configuration changes (especially `writable: true`) require a full stop/start cycle to take effect. A simple `limactl restart` is NOT sufficient - you must explicitly stop and then start the VM.
+
 ```bash
 limactl stop <vm_name>
 limactl start <vm_name>
 ```
+
+After restarting, verify the mount is writable by checking the mount flags:
+```bash
+limactl shell <vm_name> -- mount | grep <mount_path>
+```
+
+The output should show `rw` (read-write), not `ro` (read-only):
+```
+mount0 on /path/to/mount type virtiofs (rw,relatime)
+```
+
+If it still shows `ro`, stop and start again.
 
 #### Step 5: Setup SSH Config Symlink
 ```bash
@@ -195,10 +210,12 @@ After this, user can SSH with: `ssh <vm_name>`
 #### Step 6: Run Base Setup Script
 Copy and execute `scripts/setup-vm.sh` in the VM:
 ```bash
-limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/setup-vm.sh)" -- "<git_name>" "<git_email>"
+limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/setup-vm.sh)" -- "<git_name>" "<git_email>" "<working_dir>"
 ```
 
-This installs system packages, configures git, and sets up .bash_profile for SSH sessions.
+Where `<working_dir>` is the first (or primary) mounted directory path. This will be the default directory when the user shells into the VM.
+
+This installs system packages, configures git, sets up .bash_profile for SSH sessions, and configures the shell to start in the shared directory.
 
 #### Step 7: Set SSH Password (if requested)
 If user chose to set a password:
@@ -263,8 +280,9 @@ limactl shell <vm_name> -- bash -c "echo 'VM is ready!' && git --version && mise
 After successful setup, provide the user with:
 
 1. **Access commands**:
-   - `limactl shell <vm_name>` - Interactive shell
+   - `limactl shell <vm_name>` - Interactive shell (starts in shared directory)
    - `ssh <vm_name>` - SSH access (if config symlink created)
+   - `exit` or `Ctrl+D` - Exit the VM shell and return to Mac terminal
 
 2. **Common Lima commands**:
    - `limactl stop <vm_name>` - Stop the VM
@@ -294,7 +312,7 @@ After successful setup, provide the user with:
 ## Script Locations
 
 Scripts are located in `scripts/` relative to this skill:
-- `setup-vm.sh` - Base system setup (packages, git config, bash_profile)
+- `setup-vm.sh` - Base system setup (packages, git config, bash_profile, default working directory)
 - `install-mise.sh` - Mise installation and language setup
 - `install-gh.sh` - GitHub CLI installation
 - `install-ai-agent.sh` - AI coding agent installation (Claude Code, Gemini CLI, Codex CLI, OpenCode)
@@ -304,7 +322,8 @@ Scripts are located in `scripts/` relative to this skill:
 - If Lima not installed: Guide user to `brew install lima`
 - If VM creation fails: Check Lima logs with `limactl logs <vm_name>`
 - If script fails: Can re-run individual scripts after SSH into VM
-- If mounts don't work: Verify lima.yaml syntax, restart VM
+- If mounts are read-only: This is a common issue. Mount changes require a full `limactl stop` followed by `limactl start` (not just restart). Verify with `mount | grep <path>` - look for `rw` not `ro`
+- If mounts don't work: Verify lima.yaml syntax, then do a full stop/start cycle
 
 ## Notes
 

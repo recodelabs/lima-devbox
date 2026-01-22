@@ -1,11 +1,12 @@
 #!/bin/bash
 # ABOUTME: Base VM setup script for Lima devbox
-# ABOUTME: Installs system packages, configures git, and sets up bash_profile for SSH
+# ABOUTME: Installs system packages, configures git, sets up bash_profile, and configures default working directory
 
 set -euo pipefail
 
 GIT_NAME="${1:-}"
 GIT_EMAIL="${2:-}"
+WORKING_DIR="${3:-}"
 
 echo "==> Updating package lists..."
 sudo apt-get update
@@ -52,5 +53,13 @@ git config --global init.defaultBranch main
 git config --global pull.rebase false
 git config --global core.editor vim
 git config --global core.untrackedCache false
+
+# Set default working directory for shell sessions
+if [[ -n "$WORKING_DIR" ]]; then
+    echo "==> Setting default working directory to: $WORKING_DIR"
+    echo '' >> ~/.bashrc
+    echo '# Start in shared directory' >> ~/.bashrc
+    echo "cd $WORKING_DIR" >> ~/.bashrc
+fi
 
 echo "==> Base setup complete!"
