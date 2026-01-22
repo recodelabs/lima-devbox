@@ -34,11 +34,13 @@ Use AskUserQuestion to gather configuration. Ask these in sequence:
 **Question 3: Shared Directories**
 - Header: "Mounts"
 - Options:
-  - "Single directory (~/github)" - Recommended, simple setup
+  - "Single directory" - Recommended, simple setup
   - "Multiple directories" - I'll ask for a comma-separated list
 - Description: Only these directories will be accessible from the VM (read/write). The VM has no access to any other host files.
 
-**Question 3b (if multiple selected)**: Ask for comma-separated paths
+**Question 3b**: Ask for the directory path(s)
+- If single directory selected: Ask "What directory should the VM have access to?" with options like "~/github", "~/projects", or let them type a custom path
+- If multiple directories selected: Ask for comma-separated paths
 
 **Question 4: Git Configuration**
 Ask for git user.name and user.email (can use AskUserQuestion with text input)
@@ -274,6 +276,15 @@ All agents are configured with aliases for autonomous/YOLO mode operation.
 ```bash
 limactl shell <vm_name> -- bash -c "echo 'VM is ready!' && git --version && mise --version"
 ```
+
+#### Step 12: Final Restart (ensures mount permissions are correct)
+Stop and restart the VM to ensure shared directory permissions are properly applied:
+```bash
+limactl stop <vm_name>
+limactl start <vm_name>
+```
+
+Wait for the VM to be running before presenting the summary to the user.
 
 ### Phase 3: Post-Setup Summary
 
