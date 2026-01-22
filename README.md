@@ -181,7 +181,9 @@ limactl stop --force dev && limactl start dev
 - Check symlink exists: `ls -la ~/.ssh/config.d/dev`
 
 ## Credits
-A lot this knowledge was taken from Chris Hager's wonderful guide [Sandbox Your AI Dev Tools: A Practical Guide for VMs and Lima](https://www.metachris.dev/2025/11/sandbox-your-ai-dev-tools-a-practical-guide-for-vms-and-lima/). Thanks Chris!
+A lot this knowledge was taken from Chris Hager's wonderful guide [Sandbox Your AI Dev Tools: A Practical Guide for VMs and Lima](https://www.metachris.dev/2025/11/sandbox-your-ai-dev-tools-a-practical-guide-for-vms-and-lima/). 
+
+Thanks Chris!
 
 ## License
 
