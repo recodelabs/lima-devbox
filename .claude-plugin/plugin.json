@@ -1,0 +1,5 @@
+{
+  "name": "lima-devbox",
+  "version": "1.0.0",
+  "description": "Lima VM setup wizard for isolated macOS development environments"
+}
