@@ -1,6 +1,12 @@
 # lima-devbox
 
-A Claude Code skill for setting up Lima VMs as isolated development environments on macOS.   Designed to safely run your favorite AI coding agent like Claude Code in YOLO mode (`--dangerously-skip-permissions`) in a sandboxed VM so you don't need to worry about nuking your system or exposing sensitive data.
+A Claude Code skill for setting up Lima VMs as isolated development environments on macOS. Designed to safely run your favorite AI coding agent in YOLO mode in a sandboxed VM so you don't need to worry about nuking your system or exposing sensitive data.
+
+**Supported AI Coding Agents:**
+- **Claude Code** (Anthropic) - `--dangerously-skip-permissions`
+- **Gemini CLI** (Google) - `-y` auto-confirm
+- **Codex CLI** (OpenAI) - `--full-auto`
+- **OpenCode**
 
 ## What is Lima?
 
@@ -22,7 +28,7 @@ This is a Claude Code plugin that provides a guided wizard for creating and conf
 - Create a sandboxed Ubuntu VM for development
 - Configure shared directories between host and VM (only specified directories are accessible)
 - Install development tools (mise, Node.js, Go, Rust, Python, etc.)
-- Set up GitHub CLI and Claude Code CLI
+- Set up GitHub CLI and AI coding agents (Claude Code, Gemini CLI, Codex CLI, OpenCode)
 
 ## Prerequisites
 
@@ -55,11 +61,13 @@ In a Claude Code session, invoke the skill:
 
 The skill will walk you through:
 
-1. **VM Configuration**: Name, CPU, RAM, disk size
+1. **VM Configuration**: Name, CPU, RAM, disk size, VM type (vz/qemu)
 2. **Mount Setup**: Which directories the VM can access (only these directories are visible to the VM)
 3. **Git Configuration**: Your name and email for commits
 4. **Language Selection**: Node.js, Go, Rust, Python via mise
-5. **Tool Installation**: GitHub CLI, Claude Code CLI, Docker (note: nerdctl is already included)
+5. **Tool Installation**: GitHub CLI, Docker (note: nerdctl is already included)
+6. **AI Agents**: Claude Code, Gemini CLI, Codex CLI, OpenCode
+7. **Advanced Options**: Port forwarding, SSH agent forwarding, Rosetta (Apple Silicon)
 
 After the wizard, it executes the setup automatically.
 
@@ -77,8 +85,11 @@ bash scripts/install-mise.sh nodejs go python
 # Install GitHub CLI
 bash scripts/install-gh.sh
 
-# Install Claude Code CLI (adds --dangerously-skip-permissions alias)
-bash scripts/install-claude.sh
+# Install AI coding agents (choose one or more)
+bash scripts/install-ai-agent.sh claude    # Claude Code
+bash scripts/install-ai-agent.sh gemini    # Gemini CLI
+bash scripts/install-ai-agent.sh codex     # Codex CLI
+bash scripts/install-ai-agent.sh opencode  # OpenCode
 ```
 
 ## Project Structure
@@ -94,7 +105,7 @@ lima-devbox/
 │       │   ├── setup-vm.sh
 │       │   ├── install-mise.sh
 │       │   ├── install-gh.sh
-│       │   └── install-claude.sh
+│       │   └── install-ai-agent.sh
 │       └── references/
 │           └── lima-commands.md
 └── README.md

@@ -51,9 +51,15 @@ Ask for git user.name and user.email (can use AskUserQuestion with text input)
 
 **Question 6: Tools**
 - Header: "Tools"
-- Options: "GitHub CLI (gh)", "Claude Code CLI", "Docker (nerdctl already included)"
+- Options: "GitHub CLI (gh)", "Docker (nerdctl already included)"
 - multiSelect: true
 - Description: Optional tools. Note: nerdctl (docker-compatible CLI) is already installed by default - try it before installing Docker.
+
+**Question 6b: AI Coding Agents**
+- Header: "AI Agents"
+- Options: "Claude Code (Anthropic)", "Gemini CLI (Google)", "Codex CLI (OpenAI)", "OpenCode", "None"
+- multiSelect: true
+- Description: AI coding assistants to install. All support autonomous/YOLO modes for hands-off operation in this sandboxed environment.
 
 **Question 7: SSH Password (Optional)**
 - Header: "SSH Password"
@@ -216,11 +222,6 @@ For GitHub CLI:
 limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-gh.sh)"
 ```
 
-For Claude Code CLI:
-```bash
-limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-claude.sh)"
-```
-
 For Docker (if user specifically wants Docker instead of nerdctl):
 ```bash
 limactl shell <vm_name> -- bash -c "curl -fsSL https://get.docker.com | sh && sudo usermod -aG docker \$USER"
@@ -228,7 +229,31 @@ limactl shell <vm_name> -- bash -c "curl -fsSL https://get.docker.com | sh && su
 
 Note: nerdctl is already available (`nerdctl run`, `nerdctl build`, etc.) and is docker-compatible. Most users won't need Docker.
 
-#### Step 10: Verify Setup
+#### Step 10: Install AI Coding Agents (if selected)
+
+For Claude Code:
+```bash
+limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-ai-agent.sh)" -- claude
+```
+
+For Gemini CLI:
+```bash
+limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-ai-agent.sh)" -- gemini
+```
+
+For Codex CLI:
+```bash
+limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-ai-agent.sh)" -- codex
+```
+
+For OpenCode:
+```bash
+limactl shell <vm_name> -- bash -c "$(cat <skill_path>/scripts/install-ai-agent.sh)" -- opencode
+```
+
+All agents are configured with aliases for autonomous/YOLO mode operation.
+
+#### Step 11: Verify Setup
 ```bash
 limactl shell <vm_name> -- bash -c "echo 'VM is ready!' && git --version && mise --version"
 ```
@@ -272,7 +297,7 @@ Scripts are located in `scripts/` relative to this skill:
 - `setup-vm.sh` - Base system setup (packages, git config, bash_profile)
 - `install-mise.sh` - Mise installation and language setup
 - `install-gh.sh` - GitHub CLI installation
-- `install-claude.sh` - Claude Code CLI installation (includes --dangerously-skip-permissions alias)
+- `install-ai-agent.sh` - AI coding agent installation (Claude Code, Gemini CLI, Codex CLI, OpenCode)
 
 ## Error Handling
 
