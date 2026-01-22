@@ -2,6 +2,19 @@
 
 A Claude Code skill for setting up Lima VMs as isolated development environments on macOS.
 
+## What is Lima?
+
+**Lima** stands for **Linux on Mac**. It's a lightweight tool that creates Linux virtual machines on macOS with automatic file sharing and port forwarding.
+
+We use Lima for this project because:
+- **Isolation**: AI coding assistants can execute code in a sandboxed environment without access to your entire filesystem
+- **Security**: Only directories you explicitly share are visible to the VM
+- **Native performance**: Uses Apple's Virtualization.framework (vz) on modern Macs for near-native speed
+- **Simplicity**: No Docker Desktop or heavy virtualization software required
+- **Compatibility**: Run Linux tools and binaries that don't work natively on macOS
+
+Lima is particularly well-suited for AI-assisted development where you want the assistant to have full autonomy within a controlled environment.
+
 ## What is this?
 
 This is a Claude Code plugin that provides a guided wizard for creating and configuring Lima virtual machines. It helps you:
