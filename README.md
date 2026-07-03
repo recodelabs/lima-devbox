@@ -1,3 +1,7 @@
+---
+public: true
+---
+
 # lima-devbox
 
 A Claude Code skill for setting up Lima VMs as isolated development environments on macOS. Designed to safely run your favorite AI coding agent in YOLO mode in a sandboxed VM so you don't need to worry about nuking your system or exposing sensitive data.
